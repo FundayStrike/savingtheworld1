@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASRJC Campus Directory</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <h1>ASRJC Campus Directory</h1>
+    <p>
+      This webapp is a campus directory that allows students to find their way around the school with ease.
+    </p>
+    <form method="post">
+      <label for="location"><u>Enter a location</u></label><br><br>
+      <span class="material-icons" style="position: absolute;">search</span><input name="location" autocomplete=off /><br>
+    </form>
+    {% if block_png %}
+      <br><img src="{{url_for('static', filename=block_png)}}" alt="block image">
+    {% endif %}
+    <p>
+      {% if error_msg %}
+      {{error_msg}}
+    {% endif %}
+    {% if exist %}
+      {{name}} is located at
+      {% if block %}
+        block {{block}},
+      {% endif %} 
+      {% if floor %}
+        level {{floor}}
+      {% endif %} 
+      {% if classnum%}
+        ,classroom number {{classnum}}
+      {% endif %}.
+    </p>
+      <table>
+        <tr>
+          <th>Name</th>
+          <td>{{name}}</td>
+        </tr>
+        <tr>
+          <th>Block</th>
+          <td>{{block}}</td>
+        </tr>
+        <tr>
+          <th>Level</th>
+          <td>{{floor}}</td>
+        </tr>
+        <tr>
+          <th>Classroom No.</th>
+          <td>{{classnum}}</td>
+        </tr>
+        <tr>
+          <th>Additional Info</th>
+          <td>{{addinfo}}</td>
+        </tr>
+      </table>
+    {% endif %}
+  </body>
+</html>
