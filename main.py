@@ -11,7 +11,6 @@ def index():
     name = request.form["location"].title()
     connection = sqlite3.connect("loc_database.db", check_same_thread=False)
     c = connection.cursor()
-    print(get_location_details(name))
     if get_location_details(name) == []:
       error_msg = "Location is not found."
     else:
@@ -19,6 +18,8 @@ def index():
       location_details = get_location_details(name)
       name, block, classnum, addinfo = location_details[0][0], location_details[0][1], location_details[0][3], location_details[0][4]
       block_png = get_block(block)
+      if name == "Easter Egg":
+        block_png = "easter-egg.png"
       floor = str(location_details[0][2])
       if len(location_details) > 1:
         for i in range(1, len(location_details)):
